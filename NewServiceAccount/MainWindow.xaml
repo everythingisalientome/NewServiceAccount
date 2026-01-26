@@ -1,0 +1,261 @@
+﻿<Window x:Class="ServiceAccountForm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Service Account Request" Height="900" Width="950" Icon="wells-fargo-logo.png">
+
+    <Window.Resources>
+        <Style x:Key="SectionHeaderStyle" TargetType="Border">
+            <Setter Property="Background" Value="#A0A0A0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="BorderBrush" Value="#808080"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="SectionTitleText" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="InfoTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Foreground" Value="#444"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <Style x:Key="WarningTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#B00000"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#F0F0F0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"  Padding="20,15">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="wells-fargo-logo.png" Height="50" Margin="0,0,20,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <TextBlock Text="Service Account Form" Foreground="#D71E28" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Arial"/>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="MainFormGrid" Margin="20">
+                <StackPanel>
+
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Select an action" VerticalAlignment="Center" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <ComboBox x:Name="CmbAction" Grid.Column="1" HorizontalAlignment="Left" Width="300"/>
+                    </Grid>
+
+                    <Border BorderBrush="Gray" BorderThickness="1" Background="White" Padding="2">
+                        <StackPanel>
+
+                            <Border Style="{StaticResource SectionHeaderStyle}" Margin="0">
+                                <TextBlock Text="Create Service Account" Style="{StaticResource SectionTitleText}"/>
+                            </Border>
+
+                            <StackPanel Margin="15">
+
+                                <TextBlock Text="Create new service account" FontWeight="Bold" FontSize="14"/>
+                                <Border Background="#E0E0E0" Height="20" Margin="0,5,0,10"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Select domain" VerticalAlignment="Center" FontSize="14"/>
+                                    <ComboBox x:Name="CmbDomain" Grid.Column="1" HorizontalAlignment="Left" Width="200"/>
+                                </Grid>
+
+                                <TextBlock Text="Does the Service Account need to be created outside the ENT/CAO/Service Accounts OU?" Style="{StaticResource LabelStyle}"/>
+                                <TextBlock Text="If the account is requested outside the ENT/CAO/Service Accounts OU significant delays may occur." Style="{StaticResource InfoTextStyle}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5">
+                                    <RadioButton x:Name="rdNeedServiceAccountNo" Content="No" IsChecked="True" Margin="0,0,15,0"/>
+                                    <RadioButton x:Name="rdNeedServiceAccountYes" Content="Yes"/>
+                                </StackPanel>
+
+                                <TextBlock Text="You may request up to 10 accounts within the form by selecting 'Click to add an additional Application LAN ID'." Style="{StaticResource InfoTextStyle}" Margin="0,15,0,0"/>
+                                <TextBlock Text="Note: the accounts must fall under the same Owning AU number. By default the Service account requested in this form will be set with Password never expires setting." Style="{StaticResource InfoTextStyle}"/>
+
+                            </StackPanel>
+
+                            <Border Style="{StaticResource SectionHeaderStyle}">
+                                <TextBlock Text="Application LAN ID" Style="{StaticResource SectionTitleText}"/>
+                            </Border>
+
+                            <StackPanel Margin="15">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="Provide desired LAN ID name" Style="{StaticResource LabelStyle}"/>
+                                        <TextBlock Text="ID cannot exceed 20 characters." Style="{StaticResource InfoTextStyle}"/>
+                                    </StackPanel>
+                                    <TextBox Grid.Column="1" x:Name="txtLanID" Height="25" VerticalAlignment="Top" Margin="0,15,0,0"/>
+                                </Grid>
+
+                                <TextBlock Text="Are the account(s) used within Production (Active Directory) or non-production (DEV, SIT, UAT, QA, Test) environment?" Style="{StaticResource LabelStyle}" Margin="0,15,0,5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Under Developer Segregation of Duties (DSoD) policy, all Wells Fargo employees... are not allowed to see/get production service account password credentials." Style="{StaticResource InfoTextStyle}" Width="400" HorizontalAlignment="Left"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                                        <RadioButton x:Name="rdUseProduction" Content="Production" Margin="0,0,15,0"/>
+                                        <RadioButton x:Name="rdUseNonProduction" Content="Non-Production"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Margin="0,15,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="Are Active Directory groups needed?" Style="{StaticResource LabelStyle}"/>
+                                        <TextBlock Text="Additional groups can be added using Modify Service Account option after the account is created if more than 10 groups are needed." Style="{StaticResource InfoTextStyle}"/>
+                                    </StackPanel>
+                                    <ComboBox x:Name="CmbADGroups" Grid.Column="1" Width="100" VerticalAlignment="Top" Margin="0,15,0,0"/>
+                                </Grid>
+
+                                <Grid Margin="0,15,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Text="Does the WFC-ELID field need to be added?" Style="{StaticResource LabelStyle}"/>
+                                        <TextBlock Text="Important: ELID will model the service account name. Field is limited to 10 characters." Style="{StaticResource InfoTextStyle}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,15,0,0">
+                                        <RadioButton x:Name="rdAddElidNo" Content="No" IsChecked="True" Margin="0,0,15,0"/>
+                                        <RadioButton x:Name="rdAddElidYes" Content="Yes"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <TextBlock Text="Does the account require Interactive Logon rights?" Style="{StaticResource LabelStyle}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton x:Name="rdInteractiveNo" Content="No" IsChecked="True" Margin="0,0,15,0"/>
+                                    <RadioButton x:Name="rdInteractiveYes" Content="Yes"/>
+                                </StackPanel>
+                                <TextBlock Text="Overview: Interactive login allows the Service account to login to the Windows server operating system directly as a human would... This is not a standard option for Service accounts and should only be requested when there is a business justification." Style="{StaticResource InfoTextStyle}" Margin="0,5,0,0"/>
+                                <TextBlock Text="Important: To ensure provisioning of request is not delayed or cancelled, do not select this option if you are unsure." Style="{StaticResource WarningTextStyle}"/>
+
+                                <Button Content="Click to add an additional Application LAN ID" HorizontalAlignment="Left" Padding="10,3" Margin="0,15,0,0"/>
+                            </StackPanel>
+
+                            <Border Style="{StaticResource SectionHeaderStyle}">
+                                <TextBlock Text="AU Owner" Style="{StaticResource SectionTitleText}"/>
+                            </Border>
+
+                            <StackPanel Margin="15">
+                                <TextBlock Text="The primary approver listed in AMS is required to approve the Service Account creation. Delegates cannot approve this request." Style="{StaticResource WarningTextStyle}"/>
+
+                                <StackPanel>
+                                    <TextBlock Text="Provide Owning AU number" Style="{StaticResource LabelStyle}"/>
+                                    <TextBlock Text="Click here to access Approver look-up and confirm AU owner." Style="{StaticResource InfoTextStyle}" TextDecorations="Underline" Foreground="Blue"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,5">
+                                        <TextBox x:Name="txtAuNumber" Width="200" Height="25" LostFocus="txtAuNumber_LostFocus"/>
+                                        <TextBlock Text="AU Primary Approver:" VerticalAlignment="Center" Margin="10,0"/>
+                                        <Border Background="#E0E0E0" Width="200" Height="25">
+                                            <TextBlock x:Name="txtAuApproverName" Text="(Auto-populated)" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic"/>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <TextBlock Text="Provide the purpose for the account" Style="{StaticResource LabelStyle}"/>
+                                <TextBox x:Name="txtPurpose" Height="60" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+
+                                <TextBlock Text="What is the impact if this request is not approved?" Style="{StaticResource LabelStyle}"/>
+                                <TextBox x:Name="txtImpact" Height="60" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+
+                                <Grid Margin="0,15,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="At creation, accounts will be on-boarded to Enterprise Password Vault (EPV)... Are you aware of any limitations?" Style="{StaticResource LabelStyle}" Width="400" HorizontalAlignment="Left"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <RadioButton x:Name="rdEPVCharacterLimitNo" Content="No" Margin="0,0,15,0"/>
+                                        <RadioButton x:Name="rdEPVCharacterLimitYes" Content="Yes"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Will the account(s) listed in this request be used to perform load testing?" Style="{StaticResource LabelStyle}"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <RadioButton x:Name="rdLoadtestingNo" Content="No" Margin="0,0,15,0"/>
+                                        <RadioButton x:Name="rdLoadtestingYes" Content="Yes"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+
+                            <Border Style="{StaticResource SectionHeaderStyle}">
+                                <TextBlock Text="Enterprise Service Account Repository (eSAR) required information" Style="{StaticResource SectionTitleText}"/>
+                            </Border>
+
+                            <StackPanel Margin="15">
+                                <TextBlock Text="Information entered into this section is only used to populate the eSAR record... It is not reviewed by the IAM provisioning team." Style="{StaticResource WarningTextStyle}"/>
+
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Is the service account going to be used to log into a database?" Style="{StaticResource LabelStyle}"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <RadioButton x:Name="rdDatabaseUseNo" Content="No" Margin="0,0,10,0"/>
+                                        <RadioButton x:Name="rdDatabaseUseYes" Content="Yes" Margin="0,0,10,0"/>
+                                        <RadioButton x:Name="rdDatabaseUseUnknown" Content="Unknown"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Primary Use" VerticalAlignment="Center" FontSize="14"/>
+                                    <ComboBox x:Name="CmbPrimaryUse" Grid.Column="1" HorizontalAlignment="Left" Width="200"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <Button x:Name="btnSubmit" Content="FORM COMPLETED / CONTINUE" Margin="15,0,15,15" HorizontalAlignment="Left" Padding="20,5" Background="#E0E0E0" BorderBrush="Black" Click="btnSubmit_Click"/>
+
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

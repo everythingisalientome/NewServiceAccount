@@ -1,0 +1,28 @@
+﻿<Window x:Class="ServiceAccountForm.SuccessDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Process Complete" Height="250" Width="450"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <StackPanel Margin="20">
+        <TextBlock Text="New Service Account created successfully." 
+                   FontSize="14" FontWeight="Bold" Margin="0,0,0,15"/>
+
+        <TextBlock Text="Request Reference:" Margin="0,0,0,5"/>
+
+        <TextBox x:Name="txtArtField" 
+                 FontSize="16" 
+                 FontWeight="Bold" 
+                 Padding="0"
+                 IsReadOnly="True" 
+                 BorderThickness="0"
+                 Background="Transparent"
+                 Foreground="Black"
+                 AutomationProperties.AutomationId="ArtNumberResultId"/>
+
+        <TextBlock Text="Please keep this number handy to use with the web ART Request form." 
+                   FontSize="11" FontStyle="Italic" TextWrapping="Wrap" Margin="0,10,0,20"/>
+
+        <Button Content="OK" Width="80" Height="30" HorizontalAlignment="Right" Click="Button_Click"/>
+    </StackPanel>
+</Window>
